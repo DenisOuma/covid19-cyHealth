@@ -1,0 +1,79 @@
+:root {
+	--primary-colour: #383a39;
+	--background-prime: #d4d4d2;
+	--secondary-colour: #40a9ea;
+	--text-colour: #fff;
+	--text-colour-font: rgb(170, 169, 169);
+}
+.select {
+	min-height: 30px;
+	border: 1px solid #eee;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	padding: 0;
+	height: 10px;
+	position: relative;
+	width: 15%;
+	background-color: #fff;
+	cursor: pointer;
+}
+
+.select__label {
+	display: block;
+	height: 10px;
+	justify-self: flex-start;
+	font: 14px;
+	background: none;
+	border: 0;
+	width: 100%;
+	text-align: left;
+	padding: 0 20px;
+	cursor: pointer;
+}
+
+.select__label::after {
+	content: "";
+	display: block;
+	width: 2px !important;
+	height: 2px !important;
+	border-width: 8px;
+	border-style: solid;
+	border-color: #ccc transparent transparent transparent;
+	position: absolute;
+	right: 20px;
+	top: 15px;
+}
+
+ul.select__options {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	position: absolute;
+	left: 0;
+	top: 40px;
+	width: 100%;
+	border: 1px solid #eee;
+	background-color: #ccc;
+	height: 700px;
+	overflow: scroll;
+	overflow-x: hidden;
+	cursor: pointer;
+}
+
+ul.select__options > li + li {
+	border-top: 1px solid #eee;
+}
+
+ul.select__options > li > button {
+	background: transparent;
+	width: 100%;
+	border: 0;
+	padding: 10px 20px;
+	text-align: left;
+	font: 14px;
+	cursor: pointer;
+}
+ul.select__options > li:hover {
+	background-color: var(--secondary-colour);
+}

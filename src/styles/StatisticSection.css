@@ -1,0 +1,29 @@
+:root {
+	--primary-colour: #383a39;
+	--background-prime: #d4d4d2;
+	--secondary-colour: #40a9ea;
+	--text-colour: #fff;
+	--text-colour-font: rgb(170, 169, 169);
+}
+
+.outer-container {
+	text-align: center;
+}
+.next-page {
+	display: flex;
+	justify-content: center;
+	margin-top: 3px;
+	align-items: center;
+}
+.btn-pages {
+	/* padding: 5px; */
+}
+
+.btn-pages-font {
+	color: var(--text-colour-font);
+	font-size: 15px;
+}
+
+.btn-pages {
+	margin-top: 3px;
+}
