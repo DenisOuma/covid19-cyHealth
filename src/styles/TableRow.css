@@ -51,3 +51,35 @@ tr:nth-child(even) {
 	margin: 0 auto;
 	margin-left: 60px;
 }
+
+.top-select-bar {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 80%;
+	margin: 0 auto;
+	margin: 20px;
+}
+
+.new-expense__controls {
+	display: flex !important;
+	flex-wrap: wrap;
+	gap: 1rem;
+	/* margin-bottom: 1rem; */
+	text-align: left;
+}
+
+.new-expense__control label {
+	font-weight: bold;
+	margin-bottom: 0.5rem;
+	display: block;
+}
+
+.new-expense__control input {
+	font: inherit;
+	padding: 0.5rem;
+	border-radius: 6px;
+	border: 1px solid #ccc;
+	width: 20rem;
+	max-width: 100%;
+}

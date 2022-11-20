@@ -28,7 +28,7 @@ export default function BarChartDialog(props) {
 	const [open, setOpen] = React.useState(false);
 	const [historyData, setHistoryData] = React.useState([]);
 	const country = props.country.toLowerCase().toString();
-	const day = props.day.toString();
+	const [day, setDay] = React.useState(props.day.toString());
 	React.useEffect(() => {
 		getCountryHistory(country, day);
 	}, [country, day]);
@@ -41,12 +41,15 @@ export default function BarChartDialog(props) {
 		setOpen(false);
 	};
 
+	const handleChange = (e) => {
+		setDay(e.target.value);
+	};
 	const getCountryHistory = (country, day) => {
 		// console.log("My country ==>", country, day);
 		const options = {
 			method: "GET",
 			url: "https://covid-193.p.rapidapi.com/history",
-			params: { country: country, day: "2020-06-02" },
+			params: { country: country, day: day },
 			headers: {
 				"X-RapidAPI-Key": "ae9e57d040msh01d6f2dab70ab6dp1afefcjsnddbe7e9267cc",
 				"X-RapidAPI-Host": "covid-193.p.rapidapi.com",
@@ -58,7 +61,7 @@ export default function BarChartDialog(props) {
 				setHistoryData(response.data.response);
 			})
 			.catch(function (error) {
-				console.error(error);
+				console.log("Failed to fetch data");
 			});
 	};
 
@@ -70,6 +73,8 @@ export default function BarChartDialog(props) {
 		analysis.deaths = country.deaths.total;
 		return analysis;
 	});
+
+	console.log("data dat ==>", day);
 
 	return (
 		<div>
@@ -118,7 +123,20 @@ export default function BarChartDialog(props) {
 						</Button>
 					</Toolbar>
 				</AppBar>
-				<h1>{props.country} Bar Graph</h1>
+				<div className="top-select-bar">
+					<h1>{props.country} Bar Graph</h1>
+					<div className="new-expense__control">
+						<label>Select Date</label>
+						<input
+							type="date"
+							min="2019-01-01"
+							max="2022-01-01"
+							name="date"
+							value={day}
+							onChange={handleChange}
+						/>
+					</div>
+				</div>
 				<div className="inner-container">
 					<BarChart
 						width={800}
