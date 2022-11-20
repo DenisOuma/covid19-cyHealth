@@ -45,7 +45,11 @@ function TableRow(props) {
 			<td>{covid.day}</td>
 			<td>{covid.time.slice(10, 19)}</td>
 			<td>
-				<BarChartDialog className="grapg-btn" />
+				<BarChartDialog
+					country={covid.country}
+					day={covid.day}
+					className="grapg-btn"
+				/>
 			</td>
 		</tr>
 	));
@@ -62,7 +66,11 @@ function TableRow(props) {
 				<td>{covid.day}</td>
 				<td>{covid.time.slice(10, 19)}</td>
 				<td>
-					<BarChartDialog className="grapg-btn" />
+					<BarChartDialog
+						country={covid.country}
+						day={covid.day}
+						className="grapg-btn"
+					/>
 				</td>
 			</tr>
 		));

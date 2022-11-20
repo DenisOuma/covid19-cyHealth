@@ -1,4 +1,5 @@
 import * as React from "react";
+import axios from "axios";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import AppBar from "@mui/material/AppBar";
@@ -22,8 +23,14 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 	return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function BarChartDialog() {
+export default function BarChartDialog(props) {
 	const [open, setOpen] = React.useState(false);
+	const [historyData, setHistoryData] = React.useState([]);
+	const country = props.country.toLowerCase().toString();
+	const day = props.day.toString();
+	React.useEffect(() => {
+		getCountryHistory(country, day);
+	}, [country, day]);
 
 	const handleClickOpen = () => {
 		setOpen(true);
@@ -31,6 +38,26 @@ export default function BarChartDialog() {
 
 	const handleClose = () => {
 		setOpen(false);
+	};
+
+	const getCountryHistory = (country, day) => {
+		const options = {
+			method: "GET",
+			url: "https://covid-193.p.rapidapi.com/history",
+			params: { country: country, day: day },
+			headers: {
+				"X-RapidAPI-Key": "ae9e57d040msh01d6f2dab70ab6dp1afefcjsnddbe7e9267cc",
+				"X-RapidAPI-Host": "covid-193.p.rapidapi.com",
+			},
+		};
+		axios
+			.request(options)
+			.then(function (response) {
+				setHistoryData(response.data.response);
+			})
+			.catch(function (error) {
+				console.error(error);
+			});
 	};
 	const data = [
 		{ name: "A", x: 12, y: 23, z: 122 },
@@ -43,6 +70,10 @@ export default function BarChartDialog() {
 		{ name: "H", x: 28, y: 32, z: 45 },
 		{ name: "I", x: 19, y: 43, z: 93 },
 	];
+
+	console.log(historyData);
+	console.log(props.country);
+	console.log(props.day);
 
 	return (
 		<div>
