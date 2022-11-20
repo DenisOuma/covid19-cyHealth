@@ -43,3 +43,11 @@ tr:nth-child(even) {
 .grapg-btn:hover {
 	background-color: var(--secondary-colour);
 }
+
+/* Styling the bargraph section  */
+.inner-container {
+	/* background-color: var(-); */
+	width: 90%;
+	margin: 0 auto;
+	margin-left: 60px;
+}

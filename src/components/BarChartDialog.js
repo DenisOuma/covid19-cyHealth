@@ -8,6 +8,7 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import CloseIcon from "@mui/icons-material/Close";
 import Slide from "@mui/material/Slide";
+import "../styles/TableRow.css";
 import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
 import {
 	BarChart,
@@ -41,10 +42,11 @@ export default function BarChartDialog(props) {
 	};
 
 	const getCountryHistory = (country, day) => {
+		// console.log("My country ==>", country, day);
 		const options = {
 			method: "GET",
 			url: "https://covid-193.p.rapidapi.com/history",
-			params: { country: country, day: day },
+			params: { country: country, day: "2020-06-02" },
 			headers: {
 				"X-RapidAPI-Key": "ae9e57d040msh01d6f2dab70ab6dp1afefcjsnddbe7e9267cc",
 				"X-RapidAPI-Host": "covid-193.p.rapidapi.com",
@@ -59,21 +61,15 @@ export default function BarChartDialog(props) {
 				console.error(error);
 			});
 	};
-	const data = [
-		{ name: "A", x: 12, y: 23, z: 122 },
-		{ name: "B", x: 22, y: 3, z: 73 },
-		{ name: "C", x: 13, y: 15, z: 32 },
-		{ name: "D", x: 44, y: 35, z: 23 },
-		{ name: "E", x: 35, y: 45, z: 20 },
-		{ name: "F", x: 62, y: 25, z: 29 },
-		{ name: "G", x: 37, y: 17, z: 61 },
-		{ name: "H", x: 28, y: 32, z: 45 },
-		{ name: "I", x: 19, y: 43, z: 93 },
-	];
 
-	console.log(historyData);
-	console.log(props.country);
-	console.log(props.day);
+	const data = historyData.map((country) => {
+		const analysis = {};
+		analysis.time = country.time.slice(10, 16);
+		analysis.tests = country.tests.total;
+		analysis.cases = country.cases.total;
+		analysis.deaths = country.deaths.total;
+		return analysis;
+	});
 
 	return (
 		<div>
@@ -122,17 +118,23 @@ export default function BarChartDialog(props) {
 						</Button>
 					</Toolbar>
 				</AppBar>
-				<h1>Country Bar Graph</h1>
+				<h1>{props.country} Bar Graph</h1>
 				<div className="inner-container">
-					<BarChart width={800} height={800} data={data}>
+					<BarChart
+						width={800}
+						height={800}
+						data={data}
+						style={{ marginLeft: "30px" }}
+					>
 						<CartesianGrid />
-						<XAxis dataKey="name" />
+						<XAxis dataKey="time" />
 						<YAxis />
 						<Tooltip />
 						<Legend />
-						<Bar dataKey="x" stackId="a" fill="#8884d8" />
-						<Bar dataKey="y" stackId="a" fill="#82ca9d" />
-						<Bar dataKey="y" stackId="a" fill="red" />
+						{data.time}
+						<Bar dataKey="tests" stackId="a" fill="#8884d8" />
+						<Bar dataKey="cases" stackId="a" fill="#82ca9d" />
+						<Bar dataKey="deaths" stackId="a" fill="red" />
 					</BarChart>
 				</div>
 			</Dialog>
