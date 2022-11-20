@@ -14,7 +14,7 @@ function StatisticSection({ filter, search }) {
 					marginTop: "20px",
 					border: "1px solid #ccc",
 					borderRadius: "5px",
-					height: "77vh",
+					minHeight: "77vh",
 				}}
 			>
 				<TableRow filter={filter} search={search} />

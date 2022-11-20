@@ -1,10 +1,11 @@
 import React from "react";
 import "../styles/TableRow.css";
+import BarChartDialog from "./BarChartDialog";
 
 function TableRow(props) {
 	const [statistics, setStatistics] = React.useState([]);
 	// const [label, setlabel] = React.useState(props.filter);
-	const datainterval = statistics.slice(0, 14);
+	// const datainterval = statistics.slice(0, 14);
 
 	React.useEffect(() => {
 		getStatisticsData();
@@ -33,7 +34,7 @@ function TableRow(props) {
 			country.country.toLowerCase().indexOf(props.search.toLowerCase()) !== -1
 		);
 	});
-	let countrydata = SearchCountryData.slice(0, 14).map((covid, index) => (
+	let countrydata = SearchCountryData.slice(0, 13).map((covid, index) => (
 		<tr key={index}>
 			<td>{covid.continent}</td>
 			<td>{covid.country}</td>
@@ -44,7 +45,7 @@ function TableRow(props) {
 			<td>{covid.day}</td>
 			<td>{covid.time.slice(10, 19)}</td>
 			<td>
-				<button className="grapg-btn">Graph</button>
+				<BarChartDialog className="grapg-btn" />
 			</td>
 		</tr>
 	));
@@ -61,7 +62,7 @@ function TableRow(props) {
 				<td>{covid.day}</td>
 				<td>{covid.time.slice(10, 19)}</td>
 				<td>
-					<button className="grapg-btn">Graph</button>
+					<BarChartDialog className="grapg-btn" />
 				</td>
 			</tr>
 		));
